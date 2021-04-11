@@ -1,0 +1,32 @@
+<component xmlns="http://jetbrains.org/intellij/schema/application-info"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://jetbrains.org/intellij/schema/application-info http://jetbrains.org/intellij/schema/ApplicationInfo.xsd">
+  <version major="2021" minor="1"  suffix=""/>
+  <company name="EasySoC Inc." url="https://www.easysoc.org" copyrightStart="2019"/>
+  <build number="IC-__BUILD__" date="__BUILD_DATE__"/>
+  <logo url="/chip_splash.png" textcolor="ffffff" progressColor="68D5E2" progressX="117" progressY="395" progressHeight="5" />
+  <about url="/chip_about.png" foreground="939598" copyrightForeground="939598" linkColor="095fdc" logoX="540" logoY="300" logoW="100" logoH="100"/>
+  <icon ico="chip_icon.ico" svg="/chip_icon.svg" svg-small="/chip_icon_16.svg"/>
+  <icon-eap svg="/chip_icon.svg" svg-small="/chip_icon_16.svg"/>
+  <package code="__PACKAGE_CODE__"/>
+  <names product="CHIP" fullname="EasySoC CHIP" edition="Community Edition" script="chip" motto="Bringing Agile Hardware Development to the Masses"/>
+  <essential-plugin>com.intellij.java</essential-plugin>
+  <essential-plugin>com.intellij.java.ide</essential-plugin>
+
+  <welcome-screen logo-url="/chip_logo.png"/>
+  <customize-ide-wizard provider="com.intellij.ide.customize.CustomizeChipWizardStepsProvider"/>
+
+<!--  <editor background-url="/idea_logo_welcome.png"/>-->
+
+  <plugins url="https://plugins.jetbrains.com/"
+           builtin-url="https://www.easysoc.org/plugins/plugins.xml"/>
+  <update-urls check="https://www.easysoc.org/patches/updates.xml"
+               patches="https://github.com/easysoc/patches/releases/download/2021/"/>
+
+  <help webhelp-url="https://www.jetbrains.com/help/idea/"/>
+  <documentation url="https://www.jetbrains.com/help/idea"/>
+  <feedback url="https://github.com/easysoc/chip/discussions?product=CHIP&amp;build=$BUILD&amp;description=$DESCR"/>
+  <whatsnew url="https://www.jetbrains.com/idea/whatsnew/index.html"/>
+  <keymap win="https://www.jetbrains.com/idea/docs/IntelliJIDEA_ReferenceCard.pdf"
+          mac="https://www.jetbrains.com/idea/docs/IntelliJIDEA_ReferenceCard_Mac.pdf"/>
+</component>

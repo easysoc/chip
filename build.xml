@@ -1,0 +1,54 @@
+<project name="EasySoC CHIP" default="build">
+  <property name="project.home" value="${basedir}/.."/>
+  <property name="chip.home" value="${basedir}"/>
+  <property name="build.number" value="211.6693.111" />
+  <property name="intellij.build.target.os" value="linux" />
+  <property name="intellij.build.use.compiled.classes" value="true" />
+  <property name="intellij.build.skip.build.steps" value="sources_archive,windows_jre_x86,linux_jre_x86,linux_tar_gz_without_jre,mac_sign,maven_artifacts" />
+
+  <target name="init">
+    <condition property="gradle.executable" value="${project.home}/build/dependencies/gradlew.bat"
+               else="${project.home}/build/dependencies/gradlew">
+      <os family="windows"/>
+    </condition>
+    <exec executable="${gradle.executable}" dir="${project.home}/build/dependencies" failonerror="true">
+      <env key="JAVA_HOME" value="${java.home}"/>
+      <arg value="--no-daemon"/>
+      <!--<arg value="setupKotlinPlugin"/>-->
+    </exec>
+    <propertyset id="intellij.build.properties">
+      <propertyref name="build.number"/>
+      <propertyref prefix="intellij.build."/>
+    </propertyset>
+  </target>
+
+  <macrodef name="call_gant">
+    <attribute name="script" />
+    <attribute name="target" default="default"/>
+    <sequential>
+      <java failonerror="true" jar="${project.home}/lib/ant/lib/ant-launcher.jar" fork="true">
+        <jvmarg line="-Xmx2048m"/>
+        <sysproperty key="jna.nosys" value="true" />
+        <sysproperty key="java.awt.headless" value="true"/>
+        <sysproperty key="gant.script" value="@{script}"/>
+        <sysproperty key="gant.target" value="@{target}"/>
+        <syspropertyset refid="intellij.build.properties"/>
+        <arg value="-f"/>
+        <arg value="${chip.home}/gant.xml"/>
+      </java>
+    </sequential>
+  </macrodef>
+
+  <target name="build" depends="init">
+    <call_gant script="${chip.home}/build/scripts/chip_build.gant"/>
+  </target>
+
+<!--  <target name="update-from-sources" depends="init">-->
+<!--    <call_gant script="${chip.home}/build/scripts/chip_build.gant" target="update-from-sources"/>-->
+<!--  </target>-->
+
+  <!-- Creates an updater-full.jar in ${intellij.build.output.root}/artifacts, it includes 'intellij.platform.updater' module with all its dependencies -->
+<!--  <target name="fullupdater" depends="init">-->
+<!--    <call_gant script="${chip.home}/build/scripts/chip_build.gant" target="updater-full"/>-->
+<!--  </target>-->
+</project>

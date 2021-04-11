@@ -1,0 +1,65 @@
+import org.jetbrains.intellij.build.BuildContext
+import org.jetbrains.intellij.build.BuildOptions
+import org.jetbrains.intellij.build.ChipBuilder
+import org.jetbrains.intellij.build.ChipProperties
+import org.jetbrains.intellij.build.MacHostProperties
+import org.jetbrains.intellij.build.ProprietaryBuildTools
+import org.jetbrains.jps.idea.IdeaProjectLoader
+
+// platform/build-scripts/groovy/org/jetbrains/intellij/build/impl/BuildTasksImpl.groovy
+
+String home = IdeaProjectLoader.guessHome(this)
+ProprietaryBuildTools buildTools = new ProprietaryBuildTools(null, null,
+                                                             new MacHostProperties("", "", "", ""),
+                                                             null, null, null)
+
+target('default': 'The default target') {
+  new ChipBuilder(home, buildTools).buildDistributions()
+}
+
+// there is a bug in method buildFullUpdaterJar() at file BuildTasksImpl.groovy
+// should be jar("updater-full.jar",true)
+target('updater-full': 'Build updater-full.jar which includes IDE updater with its dependencies') {
+  new ChipBuilder(home).buildFullUpdater()
+}
+
+target('update-from-sources': 'Update locally installed distribution from compiled classes') {
+  String targetDirectory = System.getProperty("intellij.build.update_target")
+
+  if (!targetDirectory.isEmpty()) {
+    def options = new BuildOptions()
+    options.useCompiledClassesFromProjectOutput = true
+    options.buildStepsToSkip << BuildOptions.SVGICONS_PREBUILD_STEP
+    options.buildStepsToSkip << BuildOptions.SEARCHABLE_OPTIONS_INDEX_STEP
+    options.buildStepsToSkip << BuildOptions.PROVIDED_MODULES_LIST_STEP
+    options.buildStepsToSkip << BuildOptions.SOURCES_ARCHIVE_STEP
+    options.buildStepsToSkip << BuildOptions.SVGICONS_PREBUILD_STEP
+    //when IDEA CE is updated from IDEA UE sources project should be loaded from IDEA UE directory
+    String projectHome = isDefined("devIdeaHome") ? devIdeaHome : home
+    new ChipBuilder(home, options, projectHome).buildUnpackedDistribution(targetDirectory)
+  }
+}
+
+// 不依赖 IdeaCommunityProperties
+//target("default": "Default") {
+//  BuildContext buildContext = BuildTasks.createBuildContextFromProduct("org.jetbrains.intellij.build.ChipProperties",
+//                                                                       ["chip/build/groovy"], "", this)
+//  def tasks = BuildTasks.create(buildContext)
+//  tasks.buildDistributions()
+//  tasks.buildUpdaterJar()
+//}
+
+target('debug': 'The debug target') {
+  BuildOptions options = new BuildOptions()
+  //options.cleanOutputFolder = false
+  String BUILD_STEPS_TO_SKIP_PROPERTY = "windows_jre_x86,linux_jre_x86,linux_tar_gz_without_jre,mac_sign,maven_artifacts"
+  options.buildNumber = "211.6693.111"
+  // linux windows mac all
+  options.targetOS = "all"
+  options.useCompiledClassesFromProjectOutput = true
+  options.buildStepsToSkip = new HashSet<>(Arrays.asList(BUILD_STEPS_TO_SKIP_PROPERTY.split(",")))
+
+  BuildContext buildContext = BuildContext.createContext(home, home, new ChipProperties(home), ProprietaryBuildTools.DUMMY, options)
+
+  new ChipBuilder(buildContext).buildDistributions()
+}
