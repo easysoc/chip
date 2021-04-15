@@ -158,7 +158,7 @@ class ChipProperties extends IdeaCommunityProperties {
 
     // https://plugins.jetbrains.com/plugin/14269-easysoc-chisel/versions
     def ChiselPluginId = "org.easysoc.chisel"
-    def ChiselPluginVersion = "1.2.5"
+    def ChiselPluginVersion = "1.3.0"
     def ChiselPluginFile = "$dependenciesPath/easysoc-chisel-${ChiselPluginVersion}.zip"
     buildContext.ant.get(src: "$jetbrainsPluginRepository/$ChiselPluginId/$ChiselPluginVersion/$ChiselPluginId-${ChiselPluginVersion}.zip",
                          dest: ChiselPluginFile, skipexisting: "true")

@@ -1,7 +1,7 @@
 <project name="EasySoC CHIP" default="build">
   <property name="project.home" value="${basedir}/.."/>
   <property name="chip.home" value="${basedir}"/>
-  <property name="build.number" value="211.6693.111" />
+  <property name="build.number" value="211.6693.112" />
   <property name="intellij.build.target.os" value="linux" />
   <property name="intellij.build.use.compiled.classes" value="true" />
   <property name="intellij.build.skip.build.steps" value="sources_archive,windows_jre_x86,linux_jre_x86,linux_tar_gz_without_jre,mac_sign,maven_artifacts" />
