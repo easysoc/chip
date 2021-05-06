@@ -1,7 +1,7 @@
 <component xmlns="http://jetbrains.org/intellij/schema/application-info"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://jetbrains.org/intellij/schema/application-info http://jetbrains.org/intellij/schema/ApplicationInfo.xsd">
-  <version major="2021" minor="1"  suffix=""/>
+  <version major="2021" minor="1.1"  suffix=""/>
   <company name="EasySoC Inc." url="https://www.easysoc.org" copyrightStart="2019"/>
   <build number="IC-__BUILD__" date="__BUILD_DATE__"/>
   <logo url="/chip_splash.png" textcolor="ffffff" progressColor="68D5E2" progressX="117" progressY="395" progressHeight="5" />

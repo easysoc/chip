@@ -54,7 +54,7 @@ target('debug': 'The debug target') {
   //options.cleanOutputFolder = false
   String BUILD_STEPS_TO_SKIP_PROPERTY = "windows_jre_x86,linux_jre_x86,linux_tar_gz_without_jre,mac_sign,maven_artifacts"
   // don't forget build.xml
-  options.buildNumber = "211.6693.113"
+  options.buildNumber = "211.7142.45"
   // linux windows mac all
   options.targetOS = "all"
   options.useCompiledClassesFromProjectOutput = true
