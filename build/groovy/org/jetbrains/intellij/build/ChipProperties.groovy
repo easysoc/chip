@@ -135,14 +135,14 @@ class ChipProperties extends IdeaCommunityProperties {
 
     // https://plugins.jetbrains.com/plugin/1347-scala/versions
     def ScalaPluginId = "org.intellij.scala"
-    def ScalaPluginVersion = "2021.1.16"
+    def ScalaPluginVersion = "2021.1.21"
     def ScalaPluginFile = "$dependenciesPath/scala-intellij-bin-${ScalaPluginVersion}.zip"
     buildContext.ant.get(src: "$jetbrainsPluginRepository/$ScalaPluginId/$ScalaPluginVersion/$ScalaPluginId-${ScalaPluginVersion}.zip",
                          dest: ScalaPluginFile, skipexisting: "true")
     buildContext.ant.unzip(src: ScalaPluginFile, dest: "$targetDirectory/plugins")
 
     def marketplacePluginId = "com.intellij.marketplace"
-    def marketplacePluginVersion = "211.7142.46"
+    def marketplacePluginVersion = "211.7628.36"
     def marketplacePluginFile = "$dependenciesPath/marketplace-${marketplacePluginVersion}.zip"
     buildContext.ant.get(src: "$jetbrainsPluginRepository/$marketplacePluginId/$marketplacePluginVersion/$marketplacePluginId-${marketplacePluginVersion}.zip",
                          dest: marketplacePluginFile, skipexisting: "true")
@@ -158,7 +158,7 @@ class ChipProperties extends IdeaCommunityProperties {
 
     // https://plugins.jetbrains.com/plugin/14269-easysoc-chisel/versions
     def ChiselPluginId = "org.easysoc.chisel"
-    def ChiselPluginVersion = "1.3.2"
+    def ChiselPluginVersion = "1.3.5"
     def ChiselPluginFile = "$dependenciesPath/easysoc-chisel-${ChiselPluginVersion}.zip"
     buildContext.ant.get(src: "$jetbrainsPluginRepository/$ChiselPluginId/$ChiselPluginVersion/$ChiselPluginId-${ChiselPluginVersion}.zip",
                          dest: ChiselPluginFile, skipexisting: "true")
